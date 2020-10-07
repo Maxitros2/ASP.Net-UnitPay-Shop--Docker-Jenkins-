@@ -11,6 +11,6 @@ namespace OmgShop.Models
         public string Name { get; set; }
         public string Status { get; set; }
         public string Donate { get; set; }
-        public DateTime TimeStamp { get; set; }
+        public DateTime? TimeStamp { get; set; }
     }
 }

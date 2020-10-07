@@ -26,7 +26,7 @@ namespace OmgShop.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Donator>>> GetUserReports()
         {
-            return await _context.Donators.Skip(_context.Donators.Count()-4).ToListAsync();
+            return await _context.Donators.FromSqlRaw("select * from donators order by Id desc limit 5;").ToListAsync();
         }
                
         // GET: api/Donators/5

@@ -269,15 +269,30 @@
         function getdonators(){
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
-            if (this.readyState === 4 && this.status === 200) {
+            if (this.readyState === 4 ) {
+                let users = JSON.parse(xhr.responseText);                    
+                for(var i=0;i<5;i++)
+                    {
+                        var getuuid = new XMLHttpRequest();
+                        getuuid.onreadystatechange = function()
+                        {
+                           if (this.readyState === 4 )
+                               setHeads(i, JSON.parse(getuuid.responseText).offlineuuid, users[i].name);
+                        }                       
+                        getuuid.open('get', 'http://tools.glowingmines.eu/convertor/nick/'+users[i].name, true);                        
+                        getuuid.send();
+                    }
                 
             }
         };
-        xhr.open('get', 'http://tools.glowingmines.eu/convertor/nick/Maxitros', true);
-        xhr.send();
-        alert('Posted using XMLHttpRequest');
+        xhr.open('get', '/api/Donators', true);
+        xhr.send();       
         return false;
     };
+           function setHeads(i,resp, name)
+           {
+               
+           }
              document.addEventListener("DOMContentLoaded", getdonators());
 </script>
 	</body>
