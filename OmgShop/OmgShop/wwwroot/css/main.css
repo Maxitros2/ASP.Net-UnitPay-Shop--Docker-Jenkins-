@@ -2837,4 +2837,15 @@ select.text-input {
 		font-size: 24px;
 	}
 }
+section
+{
+    height: 100vh;
+    opacity: 0;
+}
+.backsq
+{
+    position: absolute;
+    pointer-events: none;
+    background: #fff;
+}
 /*# sourceMappingURL=main.css.map */
