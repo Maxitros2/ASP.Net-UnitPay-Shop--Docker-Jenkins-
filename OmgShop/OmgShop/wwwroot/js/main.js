@@ -46,4 +46,26 @@ $(document).ready(function() {
     $(".modal__form").submit(function() {
         parent.$.fancybox.getInstance().close();
     });  
+
+    // Spoilers 
+    $(".spoiler__header").click(function() {        
+    	$(this).next().slideToggle();        
+    	$(this).parent(".spoiler").toggleClass("spoiler_active");  
+        if($(this).parent(".spoiler").hasClass("spoiler_active"))
+            {
+                var els = document.getElementsByClassName("spoilers-group__item");
+                Array.prototype.forEach.call(els, function(el) {
+                    if(!el.children[0].classList.contains("spoiler_active"))
+    $(el).addClass("hidden");
+});
+            }
+        else
+            {
+               var els = document.getElementsByClassName("spoilers-group__item");
+                Array.prototype.forEach.call(els, function(el) {
+                    
+    $(el).removeClass("hidden");
+});  
+            }
+    });    
 });

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -17,6 +18,8 @@ namespace OmgShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Models.DonatorContext>();
+            services.AddMvc()
+         .AddNewtonsoftJson();
             services.AddControllers();
         }
 
@@ -32,20 +35,14 @@ namespace OmgShop
                 var context = serviceScope.ServiceProvider.GetRequiredService<Models.DonatorContext>();
                 context.Database.EnsureCreated();
             }
-            app.Use(async (context, next) =>
+            
+            
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
-                await next();
-                if (context.Response.StatusCode == StatusCodes.Status404NotFound)
-                {
-
-                    context.Request.Path = "/index.html";
-                    await next();
-                }                
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
-            DefaultFilesOptions options = new DefaultFilesOptions();
-            options.DefaultFileNames.Clear();
-            options.DefaultFileNames.Add("index.html");
-            app.UseDefaultFiles(options);
+            app.UseAuthentication();           
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(endpoints =>

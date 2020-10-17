@@ -17,7 +17,7 @@ namespace OmgShop.Models
         public DbSet<Donator> Donators { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=omgsite;user=root;password=rootroot");
+            optionsBuilder.UseMySQL("server=localhost;database=omgsite;user=admin;password=2621823qQ");
         }
     }
 }

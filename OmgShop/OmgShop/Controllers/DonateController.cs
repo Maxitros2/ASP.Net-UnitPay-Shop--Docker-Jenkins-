@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace OmgShop.Controllers
 {
@@ -11,10 +12,15 @@ namespace OmgShop.Controllers
     [ApiController]
     public class DonateController : ControllerBase
     {
-        [HttpPost]        
-        public ActionResult PostDonateUrl(string donate)
+        [HttpGet]        
+        public JObject PostDonateUrl(string? method)
         {
-            return NotFound();
+            if(method=="pay")
+            {
+
+            }
+            return JObject.Parse("{\"result\": {\"message\": \"Запрос успешно обработан\"}}");
+
         }
     }
 }

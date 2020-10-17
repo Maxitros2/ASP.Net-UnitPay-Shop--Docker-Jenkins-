@@ -28,19 +28,27 @@ namespace OmgShop.Controllers
         {
             return await _context.Donators.FromSqlRaw("select * from donators order by Id desc limit 5;").ToListAsync();
         }
-               
+
         // GET: api/Donators/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Donator>> GetDonator(long id)
+        
+        [HttpGet("list")]
+        public List<string> GetDonateDesc()
         {
-            var donator = await _context.Donators.FindAsync(id);
-
-            if (donator == null)
+            return new List<string>()
             {
-                return NotFound();
-            }
-
-            return donator;
+                "Спартанец 29р",
+                "Страж 59р",
+                "Управляющий 99р",
+                "Господин 179р",
+                "Рабовладелец 299р",
+                "Гладиатор 559р",
+                "Легионер 759р",
+                "Центурион 1199р",
+                "Император 239р",
+                "Цезарь 3499р",
+                "Тор 4799р",
+                "Зевс 5999р"
+            };
         }
 
         // PUT: api/Donators/5
